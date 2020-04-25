@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
 const client = new Discord.Client();
-const firebase = require("firebase");
+// const firebase = require("firebase");
 
-firebase.initializeApp(config.sql);
-const database = firebase.database()
+// firebase.initializeApp(config.sql);
+// const database = firebase.database()
 
 client.on("ready", async => {
 	console.log("Howdy!")
@@ -21,19 +21,19 @@ client.on("message", async message => {
     
     	// Firebase
 
-    global.anotacoes = '';
-    global.magias = '';
+    // global.anotacoes = '';
+    // global.magias = '';
 
-	database.ref(`User/${message.author.id}`)
-	.once('value').then(async function(snap) {
+	// database.ref(`User/${message.author.id}`)
+	// .once('value').then(async function(snap) {
 
-	if(snap.val() !== null){
+	// if(snap.val() !== null){
 
-    database.ref(`User/${message.author.id}`)
-	.set({
-        anotacoes: anotacoes,
-        magias: magias
-	})
+    // database.ref(`User/${message.author.id}`)
+	// .set({
+    //     anotacoes: anotacoes,
+    //     magias: magias
+	// })
 
 	var embed = new Discord.RichEmbed()
 	.setAuthor("Você foi registrado com sucesso!", client.user.avatarURL)
@@ -77,11 +77,11 @@ client.on("message", async message => {
         message.channel.send({embed})
     }
 
-}else{
-		var embed = new Discord.RichEmbed()
-        .setAuthor("Oops!", client.user.avatarURL)
-        .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
-		.setColor(0x9932cc)
-		message.channel.send({embed})
-    }
-    })})
+// }else{
+// 		var embed = new Discord.RichEmbed()
+//         .setAuthor("Oops!", client.user.avatarURL)
+//         .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
+// 		.setColor(0x9932cc)
+// 		message.channel.send({embed})
+//     }
+    })//})
