@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const config = require("./configBot.json");
+const config = require("./node_modules/configBot.json");
 const client = new Discord.Client();
 const firebase = require("firebase");
 
