@@ -15,7 +15,9 @@ client.on("message", async message => {
 
 	if(message.content.indexOf(config.prefix) !== 0) return;
 	const arg = message.content.slice(config.prefix.length).trim().split(/ +/g);
-	const command = arg.shift().toLowerCase();
+    const command = arg.shift().toLowerCase();
+    
+    const mestre = message.guild.roles.get("542864141921288193")
     
     	// Firebase
 
@@ -29,7 +31,8 @@ client.on("message", async message => {
 
     database.ref(`User/${message.author.id}`)
 	.set({
-        anotacoes: anotacoes
+        anotacoes: anotacoes,
+        magias: magias
 	})
 
 	var embed = new Discord.RichEmbed()
@@ -64,7 +67,7 @@ client.on("message", async message => {
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(0x9932cc)
-        if(!message.member.roles.has(542864141921288193))return message.channel.send({embed})
+        if(!message.member.roles.has(mestre))return message.channel.send({embed})
         var embed = new Discord.RichEmbed()
         .setAuthor("Anawnwanwanaw", message.author.avatarURL)
         .addField("Você é mestre! <3", `${m.createdTimestamp - message.createdTimestamp}ms`)
