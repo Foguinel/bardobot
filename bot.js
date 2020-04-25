@@ -85,3 +85,4 @@ client.on("message", async message => {
 // 		message.channel.send({embed})
 //     }
     })//})
+client.login(config.token)
