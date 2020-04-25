@@ -39,7 +39,6 @@ client.on("message", async message => {
 	// message.channel.send({embed})
 
 	if(command === "ping" || command === "ms"){
-		if(message.author.id !== 449940691045318656)return;
 
 	var embed = new Discord.MessageEmbed()
 	.setAuthor("Ping?", client.user.avatarURL)
