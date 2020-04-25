@@ -60,7 +60,7 @@ client.on("message", async message => {
 
     if(command === "alojorge"){
 
-        if(!message.member.roles.has(message.guild.roles.find(r=>["Mestre"].includes(r.name)))){
+        if(!message.member.roles.has(message.guild.roles.cache.find(r=>["Mestre"].includes(r.name)))){
 
         var embed = new Discord.MessageEmbed()
         .setAuthor("Falta de permissão", message.author.avatarURL)
