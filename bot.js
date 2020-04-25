@@ -45,7 +45,7 @@ client.on("message", async message => {
 	.setColor(0x9932cc)
 		
 	const m = await message.channel.send({ embed });
-	var embed = new Discord.RichEmbed()
+	var embed = new Discord.MessageEmbed()
 	.setAuthor("Conexão 📶", message.author.avatarURL)
 	.addField("A sua latência é de", `${m.createdTimestamp - message.createdTimestamp}ms`)
 	.addField("A minha latência é de", `${Math.round(client.ping) -3}ms`)
