@@ -64,7 +64,7 @@ client.on("message", async message => {
 
         var embed = new Discord.MessageEmbed()
         .setAuthor("Falta de permissão", message.author.avatarURL)
-        .addField("Você não é mestre! grr", `${m.createdTimestamp - message.createdTimestamp}ms`)
+        .addField("Você não é mestre! grr", `salve`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(0x9932cc)
@@ -74,7 +74,7 @@ client.on("message", async message => {
         }else{
         var embed = new Discord.MessageEmbed()
         .setAuthor("Anawnwanwanaw", message.author.avatarURL)
-        .addField("Você é mestre! <3", `${m.createdTimestamp - message.createdTimestamp}ms`)
+        .addField("Você é mestre! <3", `salve`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(0x9932cc)
