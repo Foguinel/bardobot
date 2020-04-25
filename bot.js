@@ -35,10 +35,10 @@ client.on("message", async message => {
     //     magias: magias
 	// })
 
-	var embed = new Discord.RichEmbed()
-	.setAuthor("Você foi registrado com sucesso!", client.user.avatarURL)
-	.setColor(0x9932cc)
-	message.channel.send({embed})
+	// var embed = new Discord.RichEmbed()
+	// .setAuthor("Você foi registrado com sucesso!", client.user.avatarURL)
+	// .setColor(0x9932cc)
+	// message.channel.send({embed})
 
 	if(command === "ping" || command === "ms"){
 		if(message.author.id !== 449940691045318656)return;
