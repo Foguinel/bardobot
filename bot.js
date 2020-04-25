@@ -16,8 +16,6 @@ client.on("message", async message => {
 	if(message.content.indexOf(config.prefix) !== 0) return;
 	const arg = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = arg.shift().toLowerCase();
-
-    const mestre = message.guild.roles.some(r=>["Mestre"].includes(r.name))
     
     	// Firebase
 
@@ -62,7 +60,7 @@ client.on("message", async message => {
 
     if(command === "alojorge"){
 
-        if(!message.member.roles.has(mestre)){
+        if(!message.member.roles.has(message.guild.roles.find(r=>["Mestre"].includes(r.name)))){
 
         var embed = new Discord.MessageEmbed()
         .setAuthor("Falta de permissão", message.author.avatarURL)
