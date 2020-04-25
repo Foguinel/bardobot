@@ -62,23 +62,23 @@ client.on("message", async message => {
 
         if(!message.member.roles.has(message.guild.roles.get("542864141921288193"))){
 
-        var embed = new Discord.RichEmbed()
+        var embed = new Discord.MessageEmbed()
         .setAuthor("Falta de permissão", message.author.avatarURL)
         .addField("Você não é mestre! grr", `${m.createdTimestamp - message.createdTimestamp}ms`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(0x9932cc)
 
-        message.channel.send({embed})
+        message.channel.send(embed)
         
         }else{
-        var embed = new Discord.RichEmbed()
+        var embed = new Discord.MessageEmbed()
         .setAuthor("Anawnwanwanaw", message.author.avatarURL)
         .addField("Você é mestre! <3", `${m.createdTimestamp - message.createdTimestamp}ms`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(0x9932cc)
-        message.channel.send({embed})
+        message.channel.send(embed)
         }
     }
 
