@@ -41,7 +41,7 @@ client.on("message", async message => {
 	if(command === "ping" || command === "ms"){
 		if(message.author.id !== 449940691045318656)return;
 
-	var embed = new Discord.RichEmbed()
+	var embed = new Discord.MessageEmbed()
 	.setAuthor("Ping?", client.user.avatarURL)
 	.setColor(0x9932cc)
 		
