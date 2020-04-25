@@ -67,7 +67,7 @@ client.on("message", async message => {
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(0x9932cc)
-        if(!message.member.roles.has(mestre))return message.channel.send({embed})
+        if(!message.member.roles.has(mestre.id))return message.channel.send({embed})
         var embed = new Discord.RichEmbed()
         .setAuthor("Anawnwanwanaw", message.author.avatarURL)
         .addField("Você é mestre! <3", `${m.createdTimestamp - message.createdTimestamp}ms`)
