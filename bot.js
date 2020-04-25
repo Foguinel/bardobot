@@ -60,7 +60,7 @@ client.on("message", async message => {
 
     if(command === "alojorge"){
 
-        if(!message.member.roles.has('542864141921288193')){
+        if(!message.member.roles.cache.has('542864141921288193')){
 
         var embed = new Discord.MessageEmbed()
         .setAuthor("Falta de permissão", message.author.avatarURL)
