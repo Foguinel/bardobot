@@ -76,6 +76,25 @@ client.on("message", async message => {
             return value;
         }
 
+        function modifier(s){
+            if(s == 1) return -5;
+            if(s == 2 || s == 3) return -4;
+            if(s == 4 || s == 5) return -3;
+            if(s == 6 || s == 7) return -2;
+            if(s == 8 || s == 9) return -1;
+            if(s == 10 || s == 11) return 0;
+            if(s == 12 || s == 13) return 1;
+            if(s == 14 || s == 15) return 2;
+            if(s == 16 || s == 17) return 3;
+            if(s == 18 || s == 19) return 4;
+            if(s == 20 || s == 21) return 5;
+            if(s == 22 || s == 23) return 6;
+            if(s == 24 || s == 25) return 7;
+            if(s == 26 || s == 27) return 8;
+            if(s == 28 || s == 29) return 9;
+            if(s == 30) return -10;
+        }
+
         var value1 = randomic()
         var value2 = randomic()
         var value3 = randomic()
@@ -86,12 +105,12 @@ client.on("message", async message => {
         var embed = new Discord.MessageEmbed()
 
         .setAuthor("Atributos", message.author.avatarURL)
-        .addField(`${value1}FOR`, `Modificador ${(value1 / 2) - 10}`)
-        .addField(`${value2}CON`, `Modificador ${(value2 / 2) - 10}`)
-        .addField(`${value3}DES`, `Modificador ${(value3 / 2) - 10}`)
-        .addField(`${value4}INT`, `Modificador ${(value4 / 2) - 10}`)
-        .addField(`${value5}SAB`, `Modificador ${(value5 / 2) - 10}`)
-        .addField(`${value6}CAR`, `Modificador ${(value6 / 2) - 10}`)
+        .addField(`${value1}FOR`, `Modificador ${modifier(value1)}`)
+        .addField(`${value2}CON`, `Modificador ${modifier(value2)}`)
+        .addField(`${value3}DES`, `Modificador ${modifier(value3)}`)
+        .addField(`${value4}INT`, `Modificador ${modifier(value4)}`)
+        .addField(`${value5}SAB`, `Modificador ${modifier(value5)}`)
+        .addField(`${value6}CAR`, `Modificador ${modifier(value6)}`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(0x9932cc)
