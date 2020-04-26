@@ -60,12 +60,22 @@ client.on("message", async message => {
 
         if(!message.member.roles.cache.has('542864141921288193'))return;
 
-        var value1 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value2 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value3 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value4 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value5 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value6 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
+        function randomic(value) {
+            var v1 = Math.floor(Math.random() * 6) + 1
+            var v2 = Math.floor(Math.random() * 6) + 1
+            var v3 = Math.floor(Math.random() * 6) + 1
+            var v4 = Math.floor(Math.random() * 6) + 1
+            var total = v1 + v2 + v3 + v4
+            var min = Math.min(v1, v2, v3, v4)
+            var value = total - min
+        }
+
+        var value1 = randomic()
+        var value2 = randomic()
+        var value3 = randomic()
+        var value4 = randomic()
+        var value5 = randomic()
+        var value6 = randomic()
 
         var embed = new Discord.MessageEmbed()
 
