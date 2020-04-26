@@ -126,11 +126,11 @@ client.on("message", async message => {
         var pecas = argument[argument.length -1];
         var moedas = argument.replace(/\D/g, "");
 
-        if(pecas == "c")moedas = moedas
-        if(pecas == "p")moedas = moedas / 10
+        if(pecas == "c")moedas = moedas/ 1000
+        if(pecas == "p")moedas = moedas / 100
         if(pecas == "e")moedas = moedas / 50
-        if(pecas == "o")moedas = moedas / 100
-        if(pecas == "l")moedas = moedas / 1000
+        if(pecas == "o")moedas = moedas / 10
+        if(pecas == "l")moedas = moedas 
 
         let pc = moedas
         let pp = moedas * 10
