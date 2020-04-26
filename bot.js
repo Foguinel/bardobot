@@ -191,7 +191,7 @@ client.on("message", async message => {
         var avaliacao = text.substr(text.indexOf(" ") + 1);
         if(!avaliacao)avaliacao = "Sem motivo"
 
-        var creator = client.users.get("449940691045318656")
+        var creator = client.users.cache.get("449940691045318656")
 
         var embed = new Discord.MessageEmbed()
 
