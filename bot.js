@@ -16,6 +16,9 @@ client.on("message", async message => {
 	if(message.content.indexOf(config.prefix) !== 0) return;
 	const arg = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = arg.shift().toLowerCase();
+
+    let color = `0x${message.member.displayHexColor}`;
+    if (color == '0x000000') color = message.member.hoistRole.hexColor;
     
     	// Firebase
 
@@ -42,7 +45,7 @@ client.on("message", async message => {
 
 	var embed = new Discord.MessageEmbed()
 	.setAuthor("Ping?", client.user.avatarURL)
-	.setColor(0x9932cc)
+	.setColor(color)
 		
 	const m = await message.channel.send({ embed });
 	var embed = new Discord.MessageEmbed()
@@ -50,7 +53,7 @@ client.on("message", async message => {
 	.addField("A minha latência é de", `${m.createdTimestamp - message.createdTimestamp}ms`)
 	.setTimestamp()
 	.setFooter(`${client.user.username}`, client.user.avatarURL)
-	.setColor(0x9932cc)
+	.setColor(color)
 
 	m.edit({embed});
 
@@ -95,8 +98,13 @@ client.on("message", async message => {
             if(s == 30) return -10;
         }
 
-
-        value1 = randomic().then(value2 = randomic().then(value3 = randomic().then(value4 = randomic().then(value5 = randomic().then(value6 = randomic().then())))))
+        
+        var value1 = randomic()
+        var value2 = randomic()
+        var value3 = randomic()
+        var value4 = randomic()
+        var value5 = randomic()
+        var value6 = randomic()
 
         var embed = new Discord.MessageEmbed()
 
@@ -109,7 +117,38 @@ client.on("message", async message => {
         .addField(`${value6}CAR`, `Modificador ${modifier(value6)}`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
-        .setColor(0x9932cc)
+        .setColor(color)
+        message.channel.send(embed)
+    }
+
+    if(command === "converter"){
+        var argument = args[0]
+        var pecas = argument[argument.length -1];
+        var moedas = argument.replace( /^\D+/g, '');
+
+        if(pecas == "c")moedas = moedas
+        if(pecas == "p")moedas = moedas / 10
+        if(pecas == "e")moedas = moedas / 50
+        if(pecas == "o")moedas = moedas / 100
+        if(pecas == "l")moedas = moedas / 1000
+
+        let pc = moedas
+        let pp = moedas * 10
+        let pe = moedas * 50
+        let po = moedas * 100
+        let pl = moedas * 1000
+        var embed = new Discord.MessageEmbed()
+
+        .setAuthor("Conversão de moedas", message.author.avatarURL)
+        .addField(`Valor inicial`, `${argument}`)
+        .addField(`Peças de cobre`, `${pc}`)
+        .addField(`Peças de prata`, `${pp}`)
+        .addField(`Peças de electro`, `${pe}`)
+        .addField(`Peças de ouro`, `${po}`)
+        .addField(`Peças de platina`, `${pl}`)
+        .setTimestamp()
+        .setFooter(`${client.user.username}`, client.user.avatarURL)
+        .setColor(color)
         message.channel.send(embed)
     }
 
