@@ -125,18 +125,48 @@ client.on("message", async message => {
         var argument = arg[0]
         var pecas = argument[argument.length -1];
         var moedas = argument.replace(/\D/g, "");
+        let pc
+        let pp
+        let pe
+        let po
+        let pl
 
-        if(pecas == "c")moedas = moedas/ 1000
-        if(pecas == "p")moedas = moedas / 100
-        if(pecas == "e")moedas = moedas / 50
-        if(pecas == "o")moedas = moedas / 10
-        if(pecas == "l")moedas = moedas 
+        if(pecas == "c"){
+            pc = moedas
+            pp = moedas / 10
+            pe = moedas / 50
+            po = moedas / 100
+            pl = moedas / 1000
+        }
+        if(pecas == "p"){
+            pc = moedas * 10
+            pp = moedas 
+            pe = moedas / 5
+            po = moedas / 10
+            pl = moedas / 100
+        }
+        if(pecas == "e"){
+            pc = moedas * 50
+            pp = moedas * 5
+            pe = moedas 
+            po = moedas / 2
+            pl = moedas / 20
+        }
+        if(pecas == "o"){
+            pc = moedas * 100
+            pp = moedas * 10
+            pe = moedas * 2
+            po = moedas
+            pl = moedas / 10
+        }
+        if(pecas == "l"){
+            pc = moedas * 1000
+            pp = moedas * 100
+            pe = moedas * 20
+            po = moedas * 10
+            pl = moedas
+        }
 
-        let pc = moedas
-        let pp = moedas * 10
-        let pe = moedas * 50
-        let po = moedas * 100
-        let pl = moedas * 1000
         var embed = new Discord.MessageEmbed()
 
         .setAuthor("Conversão de moedas", message.author.avatarURL)
