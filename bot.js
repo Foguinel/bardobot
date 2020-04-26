@@ -47,8 +47,7 @@ client.on("message", async message => {
 	const m = await message.channel.send({ embed });
 	var embed = new Discord.MessageEmbed()
 	.setAuthor("Conexão 📶", message.author.avatarURL)
-	.addField("A sua latência é de", `${m.createdTimestamp - message.createdTimestamp}ms`)
-	.addField("A minha latência é de", `${Math.round(client.ping) -3}ms`)
+	.addField("A minha latência é de", `${m.createdTimestamp - message.createdTimestamp}ms`)
 	.setTimestamp()
 	.setFooter(`${client.user.username}`, client.user.avatarURL)
 	.setColor(0x9932cc)
@@ -57,28 +56,30 @@ client.on("message", async message => {
 
     }
 
-    if(command === "alojorge"){
+    if(command === "atributes" || command === "atributos"){
 
-        if(!message.member.roles.cache.has('542864141921288193')){
+        if(!message.member.roles.cache.has('542864141921288193'))return;
+
+        var value1 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
+        var value2 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
+        var value3 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
+        var value4 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
+        var value5 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
+        var value6 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
 
         var embed = new Discord.MessageEmbed()
-        .setAuthor("Falta de permissão", message.author.avatarURL)
-        .addField("Você não é mestre! grr", `salve`)
+
+        .setAuthor("Atributos", message.author.avatarURL)
+        .addField(`${value1}FOR`, `Modificador ${value1 - 10 / 2}`)
+        .addField(`${value2}CON`, `Modificador ${value2 - 10 / 2}`)
+        .addField(`${value3}DES`, `Modificador ${value3 - 10 / 2}`)
+        .addField(`${value4}INT`, `Modificador ${value4 - 10 / 2}`)
+        .addField(`${value5}SAB`, `Modificador ${value5 - 10 / 2}`)
+        .addField(`${value6}CAR`, `Modificador ${value6 - 10 / 2}`)
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(0x9932cc)
-
         message.channel.send(embed)
-        
-        }else{
-        var embed = new Discord.MessageEmbed()
-        .setAuthor("Anawnwanwanaw", message.author.avatarURL)
-        .addField("Você é mestre! <3", `salve`)
-        .setTimestamp()
-        .setFooter(`${client.user.username}`, client.user.avatarURL)
-        .setColor(0x9932cc)
-        message.channel.send(embed)
-        }
     }
 
 // }else{
