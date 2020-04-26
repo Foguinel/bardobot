@@ -66,10 +66,10 @@ client.on("message", async message => {
         //4- pegar o valor de 2- e subtrair pelo valor de 3-
         
         function randomic() {
-            var v1 = (Math.floor(Math.random() * 8) + 3)
-            var v2 = (Math.floor(Math.random() * 8) + 3)
-            var v3 = (Math.floor(Math.random() * 8) + 3)
-            var v4 = (Math.floor(Math.random() * 8) + 3)
+            var v1 = (Math.floor(Math.random() * 6) + 1)
+            var v2 = (Math.floor(Math.random() * 6) + 1)
+            var v3 = (Math.floor(Math.random() * 6) + 1)
+            var v4 = (Math.floor(Math.random() * 6) + 1)
             var total = v1 + v2 + v3 + v4
             var min = Math.min(v1, v2, v3, v4)
             var value = total - min
@@ -96,11 +96,11 @@ client.on("message", async message => {
         }
 
         var value1 = randomic()
-        var value2 = randomic()
-        var value3 = randomic()
-        var value4 = randomic()
-        var value5 = randomic()
-        var value6 = randomic()
+        .then(value2 = randomic())
+        .then(value3 = randomic())
+        .then(value4 = randomic())
+        .then(value5 = randomic())
+        .then(value6 = randomic())
 
         var embed = new Discord.MessageEmbed()
 
