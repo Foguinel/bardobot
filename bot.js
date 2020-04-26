@@ -124,7 +124,7 @@ client.on("message", async message => {
     if(command === "converter"){
         var argument = arg[0]
         var pecas = argument[argument.length -1];
-        var moedas = argument.replace( /^\D+/g, '');
+        var moedas = argument.replace(/\D/g, "");
 
         if(pecas == "c")moedas = moedas
         if(pecas == "p")moedas = moedas / 10
