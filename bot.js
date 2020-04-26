@@ -66,10 +66,10 @@ client.on("message", async message => {
         //4- pegar o valor de 2- e subtrair pelo valor de 3-
         
         function randomic() {
-            var v1 = (Math.floor(Math.random() * 6) + 1)
-            var v2 = (Math.floor(Math.random() * 6) + 1)
-            var v3 = (Math.floor(Math.random() * 6) + 1)
-            var v4 = (Math.floor(Math.random() * 6) + 1)
+            var v1 = (Math.floor(Math.random() * 8) + 3)
+            var v2 = (Math.floor(Math.random() * 8) + 3)
+            var v3 = (Math.floor(Math.random() * 8) + 3)
+            var v4 = (Math.floor(Math.random() * 8) + 3)
             var total = v1 + v2 + v3 + v4
             var min = Math.min(v1, v2, v3, v4)
             var value = total - min
