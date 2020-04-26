@@ -182,6 +182,28 @@ client.on("message", async message => {
         message.channel.send(embed)
     }
 
+    if(command === "feedback" || command === "feed" || command === "bug"){
+        message.delete();
+        var text = arg.join(" ")
+        var nota = arg[0]
+        var nota = nota.replace(/\D/g, "");
+        if(!nota)return;
+        var avaliacao = text.substr(text.indexOf(" ") + 1);
+        if(!avaliacao)avaliacao = "Sem motivo"
+
+        var creator = client.users.get("449940691045318656")
+
+        var embed = new Discord.MessageEmbed()
+
+        .setAuthor(`Avaliação de ${message.author.username}`, message.author.avatarURL)
+        .addField(`Nota`, `${nota}`)
+        .addField(`Motivo`, `${avaliacao}`)
+        .setTimestamp()
+        .setFooter(`${client.user.username}`, client.user.avatarURL)
+        .setColor(color)
+        creator.send(embed)
+    }
+
 // }else{
 // 		var embed = new Discord.RichEmbed()
 //         .setAuthor("Oops!", client.user.avatarURL)
