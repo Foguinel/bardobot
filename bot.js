@@ -183,7 +183,7 @@ client.on("message", async message => {
     }
 
     if(command === "feedback" || command === "feed" || command === "bug"){
-        message.delete();
+        message.delete(1000);
         var text = arg.join(" ")
         var nota = arg[0]
         var nota = nota.replace(/\D/g, "");
