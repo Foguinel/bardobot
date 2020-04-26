@@ -96,11 +96,11 @@ client.on("message", async message => {
         }
 
         var value1 = randomic()
-        .then(value2 = randomic())
-        .then(value3 = randomic())
-        .then(value4 = randomic())
-        .then(value5 = randomic())
-        .then(value6 = randomic())
+        var value2 = randomic()
+        var value3 = randomic()
+        var value4 = randomic()
+        var value5 = randomic()
+        var value6 = randomic()
 
         var embed = new Discord.MessageEmbed()
 
