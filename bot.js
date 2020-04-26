@@ -60,24 +60,28 @@ client.on("message", async message => {
 
         if(!message.member.roles.cache.has('542864141921288193'))return;
 
-        var value1 = (Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value2 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value3 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value4 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value5 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        var value6 = Math.min(Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1)
-        vMin1 = Math.min(value1)
-        vMin2 = Math.min(value2)
-        vMin3 = Math.min(value3)
-        vMin4 = Math.min(value4)
-        vMin5 = Math.min(value5)
-        vMin6 = Math.min(value6)
-        value1 -= vMin1
-        value2 -= vMin2
-        value3 -= vMin3
-        value4 -= vMin4
-        value5 -= vMin5
-        value6 -= vMin6
+        //1- 4 valores de 1 a 6
+        //2- somar todos
+        //3- pegar os valores de 1- e verificar o menor
+        //4- pegar o valor de 2- e subtrair pelo valor de 3-
+        
+        function randomic() {
+            var v1 = (Math.floor(Math.random() * 6) + 1)
+            var v2 = (Math.floor(Math.random() * 6) + 1)
+            var v3 = (Math.floor(Math.random() * 6) + 1)
+            var v4 = (Math.floor(Math.random() * 6) + 1)
+            var total = v1 + v2 + v3 + v4
+            var min = Math.min(v1, v2, v3, v4)
+            var value = total - min
+            return value;
+        }
+
+        var value1 = randomic()
+        var value2 = randomic()
+        var value3 = randomic()
+        var value4 = randomic()
+        var value5 = randomic()
+        var value6 = randomic()
 
         var embed = new Discord.MessageEmbed()
 
