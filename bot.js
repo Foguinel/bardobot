@@ -99,7 +99,7 @@ client.on("message", async message => {
 //Define a mana
         database.ref(`Spells/${spellname}`)
         
-        let text = collected
+        let text = message.content
         let manaValue = text.replace(/\D/g, "");
         if(!manaValue)return;
 
