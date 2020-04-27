@@ -1,10 +1,20 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
 const client = new Discord.Client();
-// const firebase = require("firebase");
+const firebase = require("firebase");
 
-// firebase.initializeApp(config.sql);
-// const database = firebase.database()
+var firebaseConfig = {
+    apiKey: process.env.API_KEY,
+    authDomain: "bardobot-95b48.firebaseapp.com",
+    databaseURL: "https://bardobot-95b48.firebaseio.com",
+    projectId: "bardobot-95b48",
+    storageBucket: "bardobot-95b48.appspot.com",
+    messagingSenderId: "138235810031",
+    appId: "1:138235810031:web:31e832b929c3ce5afa0b1a",
+    measurementId: "G-JT87FS6E7Z"
+  };
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database()
 
 client.on("ready", async => {
 	console.log("Howdy!")
@@ -22,24 +32,115 @@ client.on("message", async message => {
     
     	// Firebase
 
-    // global.anotacoes = '';
-    // global.magias = '';
+    global.anotacoes = '';
+    global.magias = '';
 
-	// database.ref(`User/${message.author.id}`)
-	// .once('value').then(async function(snap) {
+    global.name = '';
+    global.display = '';
+    global.mana = '';
+    global.description = '';
 
-	// if(snap.val() !== null){
+    database.ref(`Spells`)
+	.once('value').then(async function(snap) {
 
-    // database.ref(`User/${message.author.id}`)
-	// .set({
-    //     anotacoes: anotacoes,
-    //     magias: magias
-	// })
+    if(command === "addspell"){
+        database.ref(`Spells`)
 
-	// var embed = new Discord.RichEmbed()
-	// .setAuthor("Você foi registrado com sucesso!", client.user.avatarURL)
-	// .setColor(0x9932cc)
-	// message.channel.send({embed})
+        var embed = new Discord.MessageEmbed()
+
+        .setAuthor("Adicionando magia...", message.author.avatarURL)
+        .addField(`Dê o nome visível`, `EX: Bolas de fogo`)
+        .setTimestamp()
+        .setFooter(`${client.user.username}`, client.user.avatarURL)
+        .setColor(color)
+        const msg = await message.channel.send(embed)
+
+        let spellname = arg[0].toLowerCase()
+        if(!speelname)return;
+        database.ref(`Spells`)
+        .set({
+            name: spellname
+        })
+
+        var collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 120000 });
+        collector.on('collect', message => {
+        
+        database.ref(`Spells/${spellname}`)
+
+        let displayname = arg.join(" ").toLowerCase()
+        if(!displayname)return;
+
+        database.ref(`Spells/${spellname}`)
+        .set({
+            display: displayname
+        })
+        var embed = new Discord.MessageEmbed()
+
+        .setAuthor("Adicionando magia...", message.author.avatarURL)
+        .addField(`Determine a mana`, `EX: 40EM`)
+        .setTimestamp()
+        .setFooter(`${client.user.username}`, client.user.avatarURL)
+        .setColor(color)
+        msg.edit(embed)
+
+        var collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 30000 });
+        collector.on('collect', message => {
+        database.ref(`Spells/${spellname}`)
+        
+        let text = arg.join()
+        let manaValue = text.replace(/\D/g, "");
+        if(!manaValue)return;
+
+        database.ref(`Spells/${spellname}`)
+        .update({
+            mana: manaValue
+        })
+
+        var embed = new Discord.MessageEmbed()
+
+        .setAuthor("Adicionando magia...", message.author.avatarURL)
+        .addField(`Descreva a magia`, `EX: Uma magia muito legal na qual você pode soltar bolas de fogo em vilarejos.`)
+        .setTimestamp()
+        .setFooter(`${client.user.username}`, client.user.avatarURL)
+        .setColor(color)
+        msg.edit(embed)
+
+        var collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 600000 });
+        collector.on('collect', message => {
+        database.ref(`Spells/${spellname}`)
+        
+        let descricao = arg.join()
+        if(!descricao)return;
+
+        database.ref(`Spells/${spellname}`)
+        .update({
+            description: descricao
+        })
+        var embed = new Discord.MessageEmbed()
+
+        .setAuthor("Pronto!", message.author.avatarURL)
+        .addField(`ID`, `${spellname}`)
+        .addField(`Nome`, `${displayname}`)
+        .addField(`Mana`, `${manaValue}`
+        .setDescription(`Descrição`, `${descricao}`))
+        .setTimestamp()
+        .setFooter(`${client.user.username}`, client.user.avatarURL)
+        .setColor(color)
+        msg.edit(embed)
+    })})})
+    }
+    })
+
+	database.ref(`User/${message.author.id}`)
+	.once('value').then(async function(snap) {
+
+	if(snap.val() !== null){
+
+    database.ref(`User/${message.author.id}`)
+	.set({
+        anotacoes: anotacoes,
+        magias: magias
+	})
 
 	if(command === "ping" || command === "ms"){
 
@@ -62,11 +163,6 @@ client.on("message", async message => {
     if(command === "atributes" || command === "atributos"){
 
         if(!message.member.roles.cache.has('542864141921288193'))return;
-
-        //1- 4 valores de 1 a 6
-        //2- somar todos
-        //3- pegar os valores de 1- e verificar o menor
-        //4- pegar o valor de 2- e subtrair pelo valor de 3-
         
         function randomic() {
             var v1 = (Math.floor(Math.random() * 6) + 1)
@@ -183,7 +279,6 @@ client.on("message", async message => {
     }
 
     if(command === "feedback" || command === "feed" || command === "bug"){
-        message.delete(1000);
         var text = arg.join(" ")
         var nota = arg[0]
         var nota = nota.replace(/\D/g, "");
@@ -204,12 +299,27 @@ client.on("message", async message => {
         creator.send(embed)
     }
 
-// }else{
-// 		var embed = new Discord.RichEmbed()
-//         .setAuthor("Oops!", client.user.avatarURL)
-//         .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
-// 		.setColor(0x9932cc)
-// 		message.channel.send({embed})
-//     }
-    })//})
+    if(command === "wiki"){
+        database.ref(`User/${message.author.id}`)
+        var embed = new Discord.MessageEmbed()
+
+        .setAuthor(`Avaliação de ${message.author.username}`, message.author.avatarURL)
+        .addField(`Nota`, `${nota}`)
+        .addField(`Motivo`, `${avaliacao}`)
+        .setTimestamp()
+        .setFooter(`${client.user.username}`, client.user.avatarURL)
+        .setColor(color)
+        creator.send(embed)
+    }
+
+}else{
+    if(command){
+		var embed = new Discord.RichEmbed()
+        .setAuthor("Oops!", client.user.avatarURL)
+        .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
+		.setColor(0x9932cc)
+        message.channel.send({embed})
+    }
+    }
+    })})
 client.login(process.env.BOT_TOKEN)
