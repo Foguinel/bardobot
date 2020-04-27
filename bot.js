@@ -57,7 +57,7 @@ client.on("message", async message => {
         const msg = await message.channel.send(embed)
 
         let spellname = arg[0].toLowerCase()
-        if(!speelname)return;
+        if(!spellname)return;
         database.ref(`Spells`)
         .set({
             name: spellname
@@ -315,7 +315,7 @@ client.on("message", async message => {
 
 }else{
     if(command){
-		var embed = new Discord.RichEmbed()
+		var embed = new Discord.MessageEmbed()
         .setAuthor("Oops!", client.user.avatarURL)
         .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
 		.setColor(0x9932cc)
