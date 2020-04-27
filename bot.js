@@ -56,7 +56,7 @@ client.on("message", async message => {
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(color)
-        message.channel.send(embed)     
+        const m = await message.channel.send(embed)    
 
         .then(function(){
         message.channel.awaitMessages(response => message.content, {
@@ -83,7 +83,7 @@ client.on("message", async message => {
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(color)
-        message.edit(embed)
+        m.edit(embed)
 
     })
 
@@ -114,7 +114,7 @@ client.on("message", async message => {
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(color)
-        message.edit(embed)
+        m.edit(embed)
     })
 
         .then(function(){
@@ -145,7 +145,7 @@ client.on("message", async message => {
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(color)
-        message.edit(embed)
+        m.edit(embed)
     })
     })})})
     }
