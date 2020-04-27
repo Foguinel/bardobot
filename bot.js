@@ -57,10 +57,6 @@ client.on("message", async message => {
 
         let spellname = arg[0].toLowerCase()
         if(!spellname)return;
-        database.ref(`Spells`)
-        .set({
-            spellname
-        })
 
         var collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 120000 });
         collector.on('collect', message => {
