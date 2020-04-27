@@ -45,6 +45,9 @@ client.on("message", async message => {
     if(command === "addspell"){
         if(!message.member.roles.cache.get('542864141921288193'))return;
         database.ref(`Spells`)
+//Define o ID do spell
+        let spellname = arg[0].toLowerCase()
+        if(!spellname)return;
 
         var embed = new Discord.MessageEmbed()
 
@@ -55,15 +58,18 @@ client.on("message", async message => {
         .setColor(color)
         const msg = await message.channel.send(embed)
 
-        let spellname = arg[0].toLowerCase()
-        if(!spellname)return;
+        .then(function(){
+        message.channel.awaitMessages(response => message.content, {
+          max: 1,
+          time: 120000,
+          errors: ['time'],
+        })
 
-        var collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 120000 });
-        collector.on('collect', message => {
-        
+        .then((collected) => {
+//Define o nome visivel do spell     
         database.ref(`Spells/${spellname}`)
 
-        let displayname = arg.join(" ").toLowerCase()
+        let displayname = collected
         if(!displayname)return;
 
         database.ref(`Spells/${spellname}`)
@@ -79,11 +85,20 @@ client.on("message", async message => {
         .setColor(color)
         msg.edit(embed)
 
-        var collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 30000 });
-        collector.on('collect', message => {
+    })
+
+        .then(function(){
+        message.channel.awaitMessages(response => message.content, {
+          max: 1,
+          time: 120000,
+          errors: ['time'],
+        })
+
+        .then((collected) => {
+//Define a mana
         database.ref(`Spells/${spellname}`)
         
-        let text = arg.join()
+        let text = collected
         let manaValue = text.replace(/\D/g, "");
         if(!manaValue)return;
 
@@ -100,12 +115,20 @@ client.on("message", async message => {
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(color)
         msg.edit(embed)
+    })
 
-        var collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 600000 });
-        collector.on('collect', message => {
+        .then(function(){
+        message.channel.awaitMessages(response => message.content, {
+          max: 1,
+          time: 120000,
+          errors: ['time'],
+        })
+
+        .then((collected) => {
+//Define a descrição do spell
         database.ref(`Spells/${spellname}`)
         
-        let descricao = arg.join()
+        let descricao = collected
         if(!descricao)return;
 
         database.ref(`Spells/${spellname}`)
@@ -117,12 +140,13 @@ client.on("message", async message => {
         .setAuthor("Pronto!", message.author.avatarURL)
         .addField(`ID`, `${spellname}`)
         .addField(`Nome`, `${displayname}`)
-        .addField(`Mana`, `${manaValue}`
+        .addField(`Mana`, `${manaValue}EM`
         .setDescription(`Descrição`, `${descricao}`))
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(color)
         msg.edit(embed)
+    })
     })})})
     }
     })
