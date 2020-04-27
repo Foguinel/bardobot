@@ -26,7 +26,7 @@ client.on("message", async message => {
 	if(message.content.indexOf(config.prefix) !== 0) return;
 	const arg = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = arg.shift().toLowerCase();
-    const m;
+    const m = null;
 
     let color = `0x${message.member.displayHexColor}`;
     if (color == '0x000000') color = message.member.hoistRole.hexColor;
