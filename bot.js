@@ -44,6 +44,7 @@ client.on("message", async message => {
 	.once('value').then(async function(snap) {
 
     if(command === "addspell"){
+        if(message.member.roles.cache.get('542864141921288193'))
         database.ref(`Spells`)
 
         var embed = new Discord.MessageEmbed()
