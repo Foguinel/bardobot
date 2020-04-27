@@ -88,7 +88,7 @@ client.on("message", async message => {
 
     })
 
-        .then(function(){
+        .then(function(m){
         message.channel.awaitMessages(response => message.content, {
           max: 1,
           time: 120000,
@@ -118,7 +118,7 @@ client.on("message", async message => {
         m.edit(embed)
     })
 
-        .then(function(){
+        .then(function(m){
         message.channel.awaitMessages(response => message.content, {
           max: 1,
           time: 120000,
