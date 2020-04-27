@@ -35,7 +35,6 @@ client.on("message", async message => {
     global.anotacoes = '';
     global.magias = '';
 
-    global.name = '';
     global.display = '';
     global.mana = '';
     global.description = '';
@@ -60,7 +59,7 @@ client.on("message", async message => {
         if(!spellname)return;
         database.ref(`Spells`)
         .set({
-            name: spellname
+            spellname
         })
 
         var collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 120000 });
