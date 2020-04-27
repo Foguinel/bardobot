@@ -26,7 +26,6 @@ client.on("message", async message => {
 	if(message.content.indexOf(config.prefix) !== 0) return;
 	const arg = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = arg.shift().toLowerCase();
-    const m = null;
 
     let color = `0x${message.member.displayHexColor}`;
     if (color == '0x000000') color = message.member.hoistRole.hexColor;
@@ -57,9 +56,9 @@ client.on("message", async message => {
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(color)
-        const m = await message.channel.send(embed)    
+        const m = await message.channel.send(embed)
 
-        .then(function(){
+        .then(function(m){
         message.channel.awaitMessages(response => message.content, {
           max: 1,
           time: 120000,
@@ -84,6 +83,7 @@ client.on("message", async message => {
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(color)
+
         m.edit(embed)
 
     })
