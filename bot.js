@@ -56,7 +56,7 @@ client.on("message", async message => {
         .setTimestamp()
         .setFooter(`${client.user.username}`, client.user.avatarURL)
         .setColor(color)
-        const msg = await message.channel.send(embed)
+        var msg = await message.channel.send(embed)
 
         .then(function(){
         message.channel.awaitMessages(response => message.content, {
@@ -332,14 +332,14 @@ client.on("message", async message => {
         creator.send(embed)
     }
 
-}else{
-    if(command){
-		var embed = new Discord.MessageEmbed()
-        .setAuthor("Oops!", client.user.avatarURL)
-        .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
-		.setColor(0x9932cc)
-        message.channel.send({embed})
-    }
-    }
-    })})
+// }else{
+//     if(command){
+// 		var embed = new Discord.MessageEmbed()
+//         .setAuthor("Oops!", client.user.avatarURL)
+//         .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
+// 		.setColor(0x9932cc)
+//         message.channel.send({embed})
+     }
+     })
+    })//})
 client.login(process.env.BOT_TOKEN)
