@@ -127,6 +127,7 @@ client.on("message", async message => {
             description: descriptiontxt
         })
 
+        database.ref(`Spell/${spellname}`)
         var embed = new Discord.MessageEmbed()
 	    .setAuthor(`${snap.val().display}`)
         .addField(`ID`, `${spellname}`)
