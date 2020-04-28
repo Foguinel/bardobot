@@ -105,6 +105,18 @@ client.on("message", async message => {
     if(command === "spell"){
 
         var ID = arg[0].toLowerCase()
+        if(!ID){
+        database.ref(`Spell`)
+        var items = snap.val()
+        var embed = new Discord.MessageEmbed()
+        .setAuthor(`${items}`)
+        .setDescription()
+	    .setTimestamp()
+	    .setFooter(`${client.user.username}`, client.user.avatarURL)
+	    .setColor(color)
+
+	    message.channel.send(embed);
+        }else{
 
         database.ref(`Spell/${ID}`)
         var Display = snap.val().display
@@ -121,7 +133,8 @@ client.on("message", async message => {
 	    .setFooter(`${client.user.username}`, client.user.avatarURL)
 	    .setColor(color)
 
-	    message.channel.send(embed);
+        message.channel.send(embed);
+        }
     }})
 
 	database.ref(`User/${message.author.id}`)
