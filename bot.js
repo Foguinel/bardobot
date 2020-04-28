@@ -45,7 +45,7 @@ client.on("message", async message => {
     if(command === "addspell"){
         if(!message.member.roles.cache.get('542864141921288193'))return;
 
-        var spellname;
+        var spellname = arg[0];
 
 	    var embed = new Discord.MessageEmbed()
 	    .setAuthor(`Criando uma magia...`)
@@ -56,30 +56,16 @@ client.on("message", async message => {
 
 	    const m = await message.channel.send(embed);
 
-        const colid = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 30000 });
         const colname = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 30000 });
         const colmana = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 60000 });
         const coldescription = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 000 });
-        colid.on('collect', message => {
-        spellname = message.content
-
-        var embed = new Discord.MessageEmbed()
-	    .setAuthor(`Criando uma magia...`)
-	    .addField(`Determine um nome para a magia`, `Ex: Bola de fogo`)
-	    .setTimestamp()
-	    .setFooter(`${client.user.username}`, client.user.avatarURL)
-	    .setColor(color)
-
-	    m.edit(embed);
-
-        }).then(
 
         colname.on('collect', message => {
 
         var nametxt = message.content
 
         database.ref(`Spell/${spellname}/`)
-        .update({
+        .set({
             display: nametxt
         })
 
@@ -92,7 +78,7 @@ client.on("message", async message => {
 
 	    m.edit(embed);
 
-        })).then(
+        }).then(
 
         colmana.on('collect', message => {
         var text = message.content
