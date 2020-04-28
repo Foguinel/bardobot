@@ -106,6 +106,8 @@ client.on("message", async message => {
 
         if(!arg[0]){
         database.ref(`Spell`)
+        .once('value').then(async function(snap) {
+        database.ref(`Spell`)
         var items = snap.val()
         var embed = new Discord.MessageEmbed()
         .setAuthor(`${items}`)
@@ -114,7 +116,8 @@ client.on("message", async message => {
 	    .setFooter(`${client.user.username}`, client.user.avatarURL)
 	    .setColor(color)
 
-	    message.channel.send(embed);
+        message.channel.send(embed);
+        })
         }else{
 
         database.ref(`Spell/${ID}`)
