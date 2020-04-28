@@ -39,7 +39,7 @@ client.on("message", async message => {
     global.mana = '';
     global.description = '';
 
-    database.ref(`Spells`)
+    database.ref(`Spell`)
 	.once('value').then(async function(snap) {
 
     if(command === "addspell"){
@@ -106,7 +106,7 @@ client.on("message", async message => {
 
         var ID = arg[0].toLowerCase()
 
-        database.ref(`Spell/fireball`)
+        database.ref(`Spell/${ID}`)
 
         var Display = snap.val().display
         var Mana = snap.val().mana
