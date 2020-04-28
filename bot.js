@@ -103,12 +103,11 @@ client.on("message", async message => {
     }
 
     if(command === "spell"){
-        var spell = arg[0].toLowerCase()
 
-        database.ref(`Spell/${spell}`)
+        database.ref(`Spell/${arg[0].toLowerCase()}`)
         var embed = new Discord.MessageEmbed()
 	    .setAuthor(`${snap.val().display}`)
-        .addField(`ID`, `${spell}`)
+        .addField(`ID`, `${arg[0].toLowerCase()}`)
         .addField(`Nome`, `${snap.val().display}`)
         .addField(`Mana`, `${snap.val().mana}EM`)
         .addField(`Descrição`, `${snap.val().description}`)
