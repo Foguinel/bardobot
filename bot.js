@@ -65,7 +65,7 @@ client.on("message", async message => {
         });
 
         collector.on('end', (collected, reason) => {
-            message.channel.send(`${respostas[0]}\n${respostas[1]}\n${respostas[2]}\n${respostas[3]}`)
+            question.edit(`${respostas[0]}\n${respostas[1]}\n${respostas[2]}\n${respostas[3]}`)
         });
 
         // var spellname = arg[0];
