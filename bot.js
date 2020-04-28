@@ -106,7 +106,7 @@ client.on("message", async message => {
 
         var ID = arg[0].toLowerCase()
 
-        database.ref(`Spell/${ID}`)
+        database.ref(`Spell/fireball`)
 
         var Display = snap.val().display
         var Mana = snap.val().mana
