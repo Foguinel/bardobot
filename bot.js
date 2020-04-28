@@ -92,7 +92,7 @@ client.on("message", async message => {
 	    .setAuthor(`${respostas[1]}`)
         .addField(`ID`, `${respostas[0]}`)
         .addField(`Nome`, `${respostas[1]}`)
-        .addField(`Mana`, `${respostas[2]}`)
+        .addField(`Mana`, `${respostas[2].replace(/\D/g, "")}EM`)
         .addField(`Descrição`, `${respostas[3]}`)
 	    .setTimestamp()
 	    .setFooter(`${client.user.username}`, client.user.avatarURL)
@@ -106,12 +106,11 @@ client.on("message", async message => {
         var spell = arg[0].toLowerCase()
 
         database.ref(`Spell/${spell}`)
-
         var embed = new Discord.MessageEmbed()
 	    .setAuthor(`${snap.val().display}`)
         .addField(`ID`, `${spell}`)
         .addField(`Nome`, `${snap.val().display}`)
-        .addField(`Mana`, `${snap.val().mana}`)
+        .addField(`Mana`, `${snap.val().mana}EM`)
         .addField(`Descrição`, `${snap.val().description}`)
 	    .setTimestamp()
 	    .setFooter(`${client.user.username}`, client.user.avatarURL)
