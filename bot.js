@@ -72,7 +72,8 @@ client.on("message", async message => {
 
 	    m.edit(embed);
 
-        }).then(
+        })
+        if(colid.collected){
 
         colname.on('collect', message => {
 
@@ -92,8 +93,8 @@ client.on("message", async message => {
 
 	    m.edit(embed);
 
-        }).then(
-
+        })
+        if(colname.collected){
         colmana.on('collect', message => {
         var text = message.content
         var manavalue = text.replace(/\D/g, "");
@@ -113,7 +114,8 @@ client.on("message", async message => {
 
 	    m.edit(embed);
 
-        }).then(
+        })
+        if(colmana.collected){
 
         coldescription.on('collect', message => {
         var descriptiontxt = message.content
@@ -137,8 +139,8 @@ client.on("message", async message => {
 
 	    m.edit(embed);
         }
-        ))))
-
+        )
+    }}}
     }
 
 	database.ref(`User/${message.author.id}`)
