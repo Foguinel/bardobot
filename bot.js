@@ -39,7 +39,7 @@ client.on("message", async message => {
     global.mana = '';
     global.description = '';
 
-    database.ref(`Spell`)
+    database.ref(`Spells`)
 	.once('value').then(async function(snap) {
 
     if(command === "addspell"){
@@ -59,7 +59,7 @@ client.on("message", async message => {
         const colid = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 30000 });
         const colname = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 30000 });
         const colmana = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 60000 });
-        const coldescription = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 600000 });
+        const coldescription = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 000 });
         colid.on('collect', message => {
         spellname = message.content
 
@@ -72,8 +72,7 @@ client.on("message", async message => {
 
 	    m.edit(embed);
 
-        })
-        if(colid.collected){
+        }).then(
 
         colname.on('collect', message => {
 
@@ -93,8 +92,8 @@ client.on("message", async message => {
 
 	    m.edit(embed);
 
-        })
-        if(colname.collected){
+        })).then(
+
         colmana.on('collect', message => {
         var text = message.content
         var manavalue = text.replace(/\D/g, "");
@@ -114,8 +113,7 @@ client.on("message", async message => {
 
 	    m.edit(embed);
 
-        })
-        if(colmana.collected){
+        })).then(
 
         coldescription.on('collect', message => {
         var descriptiontxt = message.content
@@ -127,7 +125,6 @@ client.on("message", async message => {
             description: descriptiontxt
         })
 
-        database.ref(`Spell/${spellname}`)
         var embed = new Discord.MessageEmbed()
 	    .setAuthor(`${snap.val().display}`)
         .addField(`ID`, `${spellname}`)
@@ -140,9 +137,7 @@ client.on("message", async message => {
 
 	    m.edit(embed);
         }
-        )
-    }}}
-    }
+        ))}
 
 	database.ref(`User/${message.author.id}`)
 	.once('value').then(async function(snap) {
