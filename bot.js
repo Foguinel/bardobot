@@ -65,7 +65,7 @@ client.on("message", async message => {
         respostas.push(msg.content);
         requisitos.shift();
         if (requisitos.length <= 0) return collector.stop('done');
-        m.edit(embed).catch(error => {
+        m.edit(requisitos[0]).catch(error => {
             console.error(error);
             collector.stop();
         });
