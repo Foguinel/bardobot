@@ -106,7 +106,7 @@ client.on("message", async message => {
 
         var ID = arg[0].toLowerCase()
 
-        database.ref(`Spell/ID`)
+        database.ref(`Spell/${ID}`)
 
         var Display = snap.val().display
         var Mana = snap.val().mana
@@ -123,7 +123,7 @@ client.on("message", async message => {
 	    .setColor(color)
 
 	    message.channel.send(embed);
-    }
+    }})
 
 	database.ref(`User/${message.author.id}`)
 	.once('value').then(async function(snap) {
@@ -315,5 +315,5 @@ client.on("message", async message => {
 //         message.channel.send({embed})
      }
      })
-    })})
+    })
 client.login(process.env.BOT_TOKEN)
