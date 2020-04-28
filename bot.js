@@ -81,7 +81,7 @@ client.on("message", async message => {
 
         collector.on('end', (collected, reason) => {
 
-        database(`Spell/${respostas}`)
+        database.ref(`Spell/${respostas}`)
         .set({
             display: respostas[1],
             mana: respostas[2].replace(/\D/g, ""),
@@ -105,7 +105,7 @@ client.on("message", async message => {
     if(command === "spell"){
         var spell = arg[0]
 
-        database(`Spell/${spell}`)
+        database.ref(`Spell/${spell}`)
 
         var embed = new Discord.MessageEmbed()
 	    .setAuthor(`${respostas[1]}`)
