@@ -104,9 +104,10 @@ client.on("message", async message => {
 
     if(command === "spell"){
 
-        database.ref(`Spell/${arg[0].toLowerCase()}`)
-
         var ID = arg[0].toLowerCase()
+
+        database.ref(`Spell/ID`)
+
         var Display = snap.val().display
         var Mana = snap.val().mana
         var Description = snap.val().description
