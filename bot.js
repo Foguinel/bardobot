@@ -58,7 +58,6 @@ client.on("message", async message => {
         respostas.push(msg.content);
         requisitos.shift();
         if (requisitos.length <= 0) return collector.stop('done');
-        if (requisitos.length <= 0) return message.channel.send(`${respostas[0]}\n${respostas[1]}\n${respostas[2]}\n${respostas[3]}`)
         question.edit(requisitos[0]).catch(error => {
             console.error(error);
             collector.stop();
@@ -66,9 +65,7 @@ client.on("message", async message => {
         });
 
         collector.on('end', (collected, reason) => {
-        if (reason && reason === 'stop') {
-                message.channel.send(`${respostas[0]}\n${respostas[1]}\n${respostas[2]}\n${respostas[3]}`)
-        }
+            message.channel.send(`${respostas[0]}\n${respostas[1]}\n${respostas[2]}\n${respostas[3]}`)
         });
 
         // var spellname = arg[0];
