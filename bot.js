@@ -46,11 +46,10 @@ client.on("message", async message => {
          if(!message.member.roles.cache.get('542864141921288193'))return;
 
         const requisitos = [`Defina o ID da magia`, `Defina o nome da magia`, `Defina a mana da magia`, `Descreva a magia`]
-        var title = requisitos[0]
 
         var embed = new Discord.MessageEmbed()
 	    .setAuthor(`Criando uma magia...`)
-	    .setTitle(title)
+	    .setTitle(requisitos[0])
 	    .setTimestamp()
 	    .setFooter(`${client.user.username}`, client.user.avatarURL)
 	    .setColor(color)
@@ -66,7 +65,15 @@ client.on("message", async message => {
         respostas.push(msg.content);
         requisitos.shift();
         if (requisitos.length <= 0) return collector.stop('done');
-        m.edit(title = requisitos[0]).catch(error => {
+
+        var embed = new Discord.MessageEmbed()
+	    .setAuthor(`Criando uma magia...`)
+	    .setTitle(requisitos[0])
+	    .setTimestamp()
+	    .setFooter(`${client.user.username}`, client.user.avatarURL)
+	    .setColor(color)
+
+        m.edit(embed).catch(error => {
             console.error(error);
             collector.stop();
         });
