@@ -47,10 +47,17 @@ client.on("message", async message => {
 
         const requisitos = [`Defina o ID da magia`, `Defina o nome da magia`, `Defina a mana da magia`, `Descreva a magia`]
 
-        const question = await message.channel.send(requisitos[0]);
+        var embed = new Discord.MessageEmbed()
+	    .setAuthor(`Criando uma magia...`)
+	    .setTitle(requisitos[0])
+	    .setTimestamp()
+	    .setFooter(`${client.user.username}`, client.user.avatarURL)
+	    .setColor(color)
+
+        const m = await message.channel.send(embed);
 
         const filter = msg => msg.author.id === message.author.id;
-        const collector = message.channel.createMessageCollector(filter, { time: 60 * 1000 });
+        const collector = message.channel.createMessageCollector(filter, { time: 720 * 1000 });
 
         const respostas = [];
 
@@ -58,95 +65,27 @@ client.on("message", async message => {
         respostas.push(msg.content);
         requisitos.shift();
         if (requisitos.length <= 0) return collector.stop('done');
-        question.edit(requisitos[0]).catch(error => {
+        m.edit(embed).catch(error => {
             console.error(error);
             collector.stop();
         });
         });
 
         collector.on('end', (collected, reason) => {
-            question.edit(`${respostas[0]}\n${respostas[1]}\n${respostas[2]}\n${respostas[3]}`)
+        var embed = new Discord.MessageEmbed()
+	    .setAuthor(`${respostas[1]}`)
+        .addField(`ID`, `${respostas[0]}`)
+        .addField(`Nome`, `${respostas[1]}`)
+        .addField(`Mana`, `${respostas[2]}`)
+        .addField(`Descrição`, `${respostas[3]}`)
+	    .setTimestamp()
+	    .setFooter(`${client.user.username}`, client.user.avatarURL)
+	    .setColor(color)
+
+	    m.edit(embed);
         });
 
-        // var spellname = arg[0];
-
-	    // var embed = new Discord.MessageEmbed()
-	    // .setAuthor(`Criando uma magia...`)
-	    // .addField(`Determine um nome pra sua magia`, `Ex: fireball`)
-	    // .setTimestamp()
-	    // .setFooter(`${client.user.username}`, client.user.avatarURL)
-	    // .setColor(color)
-
-	    // const m = await message.channel.send(embed);
-
-        // const colname = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 30000 });
-        // const colmana = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 60000 });
-        // const coldescription = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 000 });
-
-        // colname.on('collect', message => {
-
-        // var nametxt = message.content
-
-        // database.ref(`Spell/${spellname}/`)
-        // .set({
-        //     display: nametxt
-        // })
-
-        // var embed = new Discord.MessageEmbed()
-	    // .setAuthor(`Criando uma magia...`)
-	    // .addField(`Determine a mana da magia`, `Ex: 40EM`)
-	    // .setTimestamp()
-	    // .setFooter(`${client.user.username}`, client.user.avatarURL)
-	    // .setColor(color)
-
-	    // m.edit(embed);
-
-        // }).then(
-
-        // colmana.on('collect', message => {
-        // var text = message.content
-        // var manavalue = text.replace(/\D/g, "");
-
-        // database.ref(`Spell/${spellname}/`)
-        // .update({
-        //     display: display,
-        //     mana: manavalue
-        // })
-
-        // var embed = new Discord.MessageEmbed()
-	    // .setAuthor(`Criando uma magia...`)
-	    // .addField(`Determine a descrição da magia`, `Ex: Uma magia muito bolada que pessoas atiram contra vilarejos.`)
-	    // .setTimestamp()
-	    // .setFooter(`${client.user.username}`, client.user.avatarURL)
-	    // .setColor(color)
-
-	    // m.edit(embed);
-
-        // })).then(
-
-        // coldescription.on('collect', message => {
-        // var descriptiontxt = message.content
-
-        // database.ref(`Spell/${spellname}/`)
-        // .update({
-        //     display: display,
-        //     mana: mana,
-        //     description: descriptiontxt
-        // })
-
-        // var embed = new Discord.MessageEmbed()
-	    // .setAuthor(`${snap.val().display}`)
-        // .addField(`ID`, `${spellname}`)
-        // .addField(`Display`, `${snap.val().display}`)
-        // .addField(`Mana`, `${snap.val().mana}EM`)
-        // .addField(`Descrição`, `${snap.val().description}`)
-	    // .setTimestamp()
-	    // .setFooter(`${client.user.username}`, client.user.avatarURL)
-	    // .setColor(color)
-
-	    // m.edit(embed);
-        // }
-        // ))
+        
     }
 
 	database.ref(`User/${message.author.id}`)
