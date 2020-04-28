@@ -80,6 +80,14 @@ client.on("message", async message => {
         });
 
         collector.on('end', (collected, reason) => {
+
+        database(`Spell/${respostas}`)
+        .set({
+            display: respostas[1],
+            mana: respostas[2].replace(/\D/g, ""),
+            description: respostas[3]
+        })
+
         var embed = new Discord.MessageEmbed()
 	    .setAuthor(`${respostas[1]}`)
         .addField(`ID`, `${respostas[0]}`)
@@ -92,8 +100,24 @@ client.on("message", async message => {
 
 	    m.edit(embed);
         });
+    }
 
-        
+    if(command === "spell"){
+        var spell = arg[0]
+
+        database(`Spell/${spell}`)
+
+        var embed = new Discord.MessageEmbed()
+	    .setAuthor(`${respostas[1]}`)
+        .addField(`ID`, `${respostas[0]}`)
+        .addField(`Nome`, `${respostas[1]}`)
+        .addField(`Mana`, `${respostas[2]}`)
+        .addField(`Descrição`, `${respostas[3]}`)
+	    .setTimestamp()
+	    .setFooter(`${client.user.username}`, client.user.avatarURL)
+	    .setColor(color)
+
+	    message.channel.send(embed);
     }
 
 	database.ref(`User/${message.author.id}`)
