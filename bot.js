@@ -49,7 +49,7 @@ client.on("message", async message => {
 
 	    var embed = new Discord.MessageEmbed()
 	    .setAuthor(`Criando uma magia...`)
-	    .addField(`Determine um ID pra sua magia`, `Ex: fireball`)
+	    .addField(`Determine um nome pra sua magia`, `Ex: fireball`)
 	    .setTimestamp()
 	    .setFooter(`${client.user.username}`, client.user.avatarURL)
 	    .setColor(color)
