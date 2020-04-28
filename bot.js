@@ -105,12 +105,18 @@ client.on("message", async message => {
     if(command === "spell"){
 
         database.ref(`Spell/${arg[0].toLowerCase()}`)
+
+        var ID = arg[0].toLowerCase()
+        var Display = snap.val().display
+        var Mana = snap.val().mana
+        var Description = snap.val().description
+
         var embed = new Discord.MessageEmbed()
-	    .setAuthor(`${snap.val().display}`)
-        .addField(`ID`, `${arg[0].toLowerCase()}`)
-        .addField(`Nome`, `${snap.val().display}`)
-        .addField(`Mana`, `${snap.val().mana}EM`)
-        .addField(`Descrição`, `${snap.val().description}`)
+	    .setAuthor(`${Display}`)
+        .addField(`ID`, `${ID}`)
+        .addField(`Nome`, `${Display}`)
+        .addField(`Mana`, `${Mana}EM`)
+        .addField(`Descrição`, `${Description}`)
 	    .setTimestamp()
 	    .setFooter(`${client.user.username}`, client.user.avatarURL)
 	    .setColor(color)
