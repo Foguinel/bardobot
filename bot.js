@@ -78,7 +78,7 @@ client.on("message", async message => {
 
         var nametxt = message.content
 
-        database.ref(`Spell/${spellname}`)
+        database.ref(`Spell/${spellname}/`)
         .update({
             display: nametxt
         })
@@ -98,7 +98,7 @@ client.on("message", async message => {
         var text = message.content
         var manavalue = text.replace(/\D/g, "");
 
-        database.ref(`Spell/${spellname}`)
+        database.ref(`Spell/${spellname}/`)
         .update({
             display: display,
             mana: manavalue
@@ -118,7 +118,7 @@ client.on("message", async message => {
         coldescription.on('collect', message => {
         var descriptiontxt = message.content
 
-        database.ref(`Spell/${spellname}`)
+        database.ref(`Spell/${spellname}/`)
         .update({
             display: display,
             mana: mana,
