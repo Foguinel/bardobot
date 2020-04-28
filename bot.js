@@ -81,7 +81,7 @@ client.on("message", async message => {
 
         collector.on('end', (collected, reason) => {
 
-        database.ref(`Spell/${respostas}`)
+        database.ref(`Spell/${respostas[0].toLowerCase()}`)
         .set({
             display: respostas[1],
             mana: respostas[2].replace(/\D/g, ""),
@@ -103,16 +103,16 @@ client.on("message", async message => {
     }
 
     if(command === "spell"){
-        var spell = arg[0]
+        var spell = arg[0].toLowerCase()
 
         database.ref(`Spell/${spell}`)
 
         var embed = new Discord.MessageEmbed()
-	    .setAuthor(`${respostas[1]}`)
-        .addField(`ID`, `${respostas[0]}`)
-        .addField(`Nome`, `${respostas[1]}`)
-        .addField(`Mana`, `${respostas[2]}`)
-        .addField(`Descrição`, `${respostas[3]}`)
+	    .setAuthor(`${snap.val().display}`)
+        .addField(`ID`, `${spell}`)
+        .addField(`Nome`, `${snap.val().display}`)
+        .addField(`Mana`, `${snap.val().mana}`)
+        .addField(`Descrição`, `${snap.val().description}`)
 	    .setTimestamp()
 	    .setFooter(`${client.user.username}`, client.user.avatarURL)
 	    .setColor(color)
