@@ -104,8 +104,7 @@ client.on("message", async message => {
 
     if(command === "spell"){
 
-        var ID = arg[0].toLowerCase()
-        if(!ID){
+        if(!arg[0]){
         database.ref(`Spell`)
         var items = snap.val()
         var embed = new Discord.MessageEmbed()
