@@ -336,7 +336,7 @@ client.on("message", async message => {
 
 
     if(command){
-        if(snap.val() || snap.val() == null)return;
+        if(snap.val() || snap.val() !== null)return;
 		var embed = new Discord.MessageEmbed()
         .setAuthor("Oops!", client.user.avatarURL)
         .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
