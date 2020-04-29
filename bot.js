@@ -334,21 +334,20 @@ client.on("message", async message => {
 
     }
 
+    }else{
+    if(command){
+		var embed = new Discord.MessageEmbed()
+        .setAuthor("Oops!", client.user.avatarURL)
+        .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
+		.setColor(0x9932cc)
+        message.channel.send({embed})
 
-    // if(command){
-    //     if(snap.val() !== null)return;
-	// 	var embed = new Discord.MessageEmbed()
-    //     .setAuthor("Oops!", client.user.avatarURL)
-    //     .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
-	// 	.setColor(0x9932cc)
-    //     message.channel.send({embed})
+        database.ref(`User/${message.author.id}`)
+        .set({
+            magias: 0
+        })
 
-    //     database.ref(`User/${message.author.id}`)
-    //     .set({
-    //         magias: 0
-    //     })
-
-    //     }
+        }
     }})
     })
 client.login(process.env.BOT_TOKEN)
