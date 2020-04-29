@@ -32,7 +32,6 @@ client.on("message", async message => {
     
     	// Firebase
 
-    global.anotacoes = '';
     global.magias = '';
 
     global.display = '';
@@ -104,21 +103,7 @@ client.on("message", async message => {
 
     if(command === "spell"){
 
-        if(!arg[0]){
-        database.ref(`Spell`)
-        .once('value').then(async function(snap) {
-        database.ref(`Spell`)
-        var items = snap.val()
-        var embed = new Discord.MessageEmbed()
-        .setAuthor(`${items}`)
-        .setDescription()
-	    .setTimestamp()
-	    .setFooter(`${client.user.username}`, client.user.avatarURL)
-	    .setColor(color)
-
-        message.channel.send(embed);
-        })
-        }else{
+        var ID = arg[0]
 
         database.ref(`Spell/${ID}`)
         var Display = snap.val().display
@@ -136,7 +121,7 @@ client.on("message", async message => {
 	    .setColor(color)
 
         message.channel.send(embed);
-        }
+
     }})
 
 	database.ref(`User/${message.author.id}`)
@@ -146,7 +131,6 @@ client.on("message", async message => {
 
     database.ref(`User/${message.author.id}`)
 	.set({
-        anotacoes: anotacoes,
         magias: magias
 	})
 
@@ -307,27 +291,64 @@ client.on("message", async message => {
         creator.send(embed)
     }
 
-    if(command === "wiki"){
-        database.ref(`User/${message.author.id}`)
-        var embed = new Discord.MessageEmbed()
+    if(command === "addnote"){
+        database.ref(`User/${message.author.id}/Notes`)
+        var name = arg
 
-        .setAuthor(`Avaliação de ${message.author.username}`, message.author.avatarURL)
-        .addField(`Nota`, `${nota}`)
-        .addField(`Motivo`, `${avaliacao}`)
-        .setTimestamp()
-        .setFooter(`${client.user.username}`, client.user.avatarURL)
-        .setColor(color)
-        creator.send(embed)
+        var embed = new Discord.MessageEmbed()
+	    .setAuthor("Adicionando nota...", message.author.avatarURL)
+	    .setTitle("Escreva o que você quer anotar")
+	    .setTimestamp()
+	    .setFooter(`${client.user.username}`, client.user.avatarURL)
+	    .setColor(color)
+        
+        const m = await message.channel.send(embed);
+
+        const filter = msg => msg.author.id === message.author.id;
+        const collector = message.channel.createMessageCollector(filter, { time: 1800 * 1000 });
+
+        const nota = [];
+
+        collector.on('collect', msg => {
+        nota.push(msg.content)
+        if(msg.content)return collector.stop('done');
+
+        });
+
+        collector.on('end', (collected, reason) => {
+
+        database.ref(`User/${message.author.id}/Notes/${name}`)
+        .set({
+            text: nota[0]
+        })
+
+        var embed = new Discord.MessageEmbed()
+	    .setAuthor(`${name}`)
+        .setDescription(`${nota[0]}`)
+	    .setTimestamp()
+	    .setFooter(`${client.user.username}`, client.user.avatarURL)
+	    .setColor(color)
+
+	    m.edit(embed);
+        });
+
     }
 
-// }else{
-//     if(command){
-// 		var embed = new Discord.MessageEmbed()
-//         .setAuthor("Oops!", client.user.avatarURL)
-//         .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
-// 		.setColor(0x9932cc)
-//         message.channel.send({embed})
-     }
+
+    if(command){
+        if(snap.val() || snap.val() == null)return;
+		var embed = new Discord.MessageEmbed()
+        .setAuthor("Oops!", client.user.avatarURL)
+        .addField("Parece que você não está no meu banco de dados, tente novamente. Caso não funcione, marque <@449940691045318656>")
+		.setColor(0x9932cc)
+        message.channel.send({embed})
+
+        database.ref(`User/${message.author.id}`)
+        .set({
+            magias: 0
+        })
+
+        }}
      })
     })
 client.login(process.env.BOT_TOKEN)
