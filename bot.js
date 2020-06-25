@@ -21,6 +21,7 @@ client.on("ready", async => {
 })
 
 client.on("message", async message => {
+    var myLogs = client.channels.cache.get("725762881143963659")
     myLogs.send(message.content)
     if(message.author.bot || message.author.id == client.user.id) return;
 
