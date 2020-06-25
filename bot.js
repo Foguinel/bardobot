@@ -101,6 +101,13 @@ client.on("message", async message => {
         });
     }
 
+    if(command === "testing"){
+
+        var guild = `542859743170134026`
+        message.channel.send(`${guild.channels.id}`)
+
+    }
+
     if(command === "spell"){
 
         var ID = arg[0]
