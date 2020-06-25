@@ -105,7 +105,7 @@ client.on("message", async message => {
 
         var channel = client.channels.cache.find(channel => channel.name === 'true-sight')
         channel.fetch()
-        .then(messages => console.log(messages))
+        .then(messages => console.log(messages.array()))
 
     }
 
