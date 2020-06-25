@@ -104,7 +104,7 @@ client.on("message", async message => {
     if(command === "testing"){
 
         var guild = `542859743170134026`
-        message.channel.send(`${guild.channels.id}`)
+        message.channel.send(`${message.guild.channels.cache._array}`)
 
     }
 
