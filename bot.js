@@ -103,8 +103,9 @@ client.on("message", async message => {
 
     if(command === "testing"){
 
-        var guild = `542859743170134026`
-        message.channel.send(`${guild.channels.cache.array()}`)
+        var channel = client.channels.find("name", "true-sight")
+        channel.fetchMessages()
+        .then(messages => console.log(messages))
 
     }
 
