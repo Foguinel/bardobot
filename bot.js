@@ -104,7 +104,18 @@ client.on("message", async message => {
     if(command === "testing"){
 
         var guild = `542859743170134026`
-        message.channel.send(`${message.guild.channels.cache._array}`)
+        function getChannelIDs(fetch) 
+        {
+        var array = [];
+        let channels = client.guilds.channels;
+        for (const channel of channels.values()) 
+        {
+            array.push(channel.id);
+            console.log(channel.id);
+        }
+
+        return array;
+        }
 
     }
 
