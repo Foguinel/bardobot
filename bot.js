@@ -102,8 +102,8 @@ client.on("message", async message => {
     }
 
     if(command === "testing"){
-
-        var channel = message.guild.channels.find(channel => channel.name === 'true-sight')
+        
+        var channel = client.channels.find(channel => channel.name === 'true-sight')
         channel.fetchMessages()
         .then(messages => console.log(messages))
 
